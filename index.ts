@@ -20,6 +20,4 @@ app.get("/health", (req: Request, res: Response) => {
   res.status(200).send({ message: "All Good :-)" });
 });
 
-app.listen(port, () =>
-  console.log(`server running on http://localhost:${port}`)
-);
+app.listen(port, () => console.log(`Server runs on http://localhost:${port}`));
