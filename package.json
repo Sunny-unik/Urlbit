@@ -5,8 +5,11 @@
   "main": "index.ts",
   "scripts": {
     "start": "node dist/index.js",
-    "dev": "tsnd --inspect -- index.ts",
-    "build": "rimraf dist && tsc && echo build success 👍"
+    "dev": "concurrently \"npm run watch\" \"npm run tailwind:watch\"",
+    "watch": "tsnd --inspect -- index.ts",
+    "tailwind:watch": "postcss public/styles/index.css -o public/styles/style.css --watch",
+    "build": "rimraf dist && npm run tailwind:prod && tsc",
+    "tailwind:prod": "postcss public/styles/index.css -o public/styles/style.css"
   },
   "repository": {
     "type": "git",
@@ -31,7 +34,12 @@
     "@types/ejs": "^3.1.5",
     "@types/express": "^4.17.21",
     "@types/node": "^20.9.0",
+    "autoprefixer": "^10.4.16",
+    "concurrently": "^8.2.2",
+    "postcss": "^8.4.31",
+    "postcss-cli": "^10.1.0",
     "rimraf": "^5.0.5",
+    "tailwindcss": "^3.3.5",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.2.2"
   },

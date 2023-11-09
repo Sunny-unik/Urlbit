@@ -3,19 +3,23 @@
   <head>
     <%- include('../components/head'); %>
   </head>
-  <body class="container">
-    <header><%- include('../components/header'); %></header>
+  <body>
+    <div class="bg-light">
+      <header>
+        <%- include('../components/header', {activePage:"contact"}); %>
+      </header>
 
-    <main>
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="jumbotron">
-            <h1>This service isn't working for now</h1>
+      <main class="container mx-auto">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="jumbotron">
+              <h1>This service isn't working for now</h1>
+            </div>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
 
-    <footer><%- include('../components/footer'); %></footer>
+      <footer><%- include('../components/footer'); %></footer>
+    </div>
   </body>
 </html>

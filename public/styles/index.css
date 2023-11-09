@@ -7,3 +7,7 @@
 body {
   font-family: "segoe ui";
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

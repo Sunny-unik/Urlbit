@@ -4,13 +4,26 @@
     <%- include('../components/head'); %>
   </head>
   <body>
-    <div class="container">
-      <header><%- include('../components/header'); %></header>
+    <div class="bg-light">
+      <header>
+        <%- include('../components/header',{activePage:"home"}); %>
+      </header>
 
-      <main>
+      <main class="container mx-auto">
         <div class="jumbotron">
-          <h1>Hello World</h1>
-          <p>Welcome to Javascript World</p>
+          <h3>Get your short URL in milliseconds totally free.</h3>
+          <br />
+          <form action="" method="post">
+            <div class="form-row align-items">
+              <input type="url" class="form-control" />
+              <br />
+              <div class="text-center">
+                <button class="urlSubmit btn btn-info m-auto" type="button">
+                  Submit
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
       </main>
 
