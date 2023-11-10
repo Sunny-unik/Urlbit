@@ -6,7 +6,6 @@
   "scripts": {
     "start": "node dist/index.js",
     "dev": "concurrently \"nodemon\" \"npm run tailwind:watch\"",
-    "watch": "nodemon",
     "tailwind:watch": "postcss public/styles/index.css -o public/styles/style.css --watch",
     "build": "rimraf dist && npm run tailwind:prod && npm run compile:ts && npm run copy:static",
     "compile:ts": "esbuild index.ts --platform=node --bundle --minify --outfile=dist/index.js",
