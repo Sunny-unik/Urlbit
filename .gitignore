@@ -131,3 +131,4 @@ dist
 
 # custom
 .vscode
+public/styles/style.css
