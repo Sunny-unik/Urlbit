@@ -11,7 +11,7 @@
     "build": "rimraf dist && npm run tailwind:prod && npm run compile:ts && npm run copy:static",
     "compile:ts": "esbuild index.ts --platform=node --bundle --minify --outfile=dist/index.js",
     "tailwind:prod": "postcss public/styles/index.css -o public/styles/style.css",
-    "copy:static": "xcopy /E /I public dist\\public && xcopy /E /I src\\views dist\\src\\views"
+    "copy:static": "xcopy /E /I /Y public dist\\public && xcopy /E /I /Y src\\views dist\\src\\views"
   },
   "repository": {
     "type": "git",
