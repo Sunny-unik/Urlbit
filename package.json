@@ -2,14 +2,16 @@
   "name": "server",
   "version": "1.0.0",
   "description": "urlbit's server",
-  "main": "index.ts",
+  "main": "index.js",
   "scripts": {
     "start": "node dist/index.js",
-    "dev": "concurrently \"npm run watch\" \"npm run tailwind:watch\"",
-    "watch": "tsnd --inspect -- index.ts",
+    "dev": "concurrently \"nodemon\" \"npm run tailwind:watch\"",
+    "watch": "nodemon",
     "tailwind:watch": "postcss public/styles/index.css -o public/styles/style.css --watch",
-    "build": "rimraf dist && npm run tailwind:prod && tsc",
-    "tailwind:prod": "postcss public/styles/index.css -o public/styles/style.css"
+    "build": "rimraf dist && npm run tailwind:prod && npm run compile:ts && npm run copy:static",
+    "compile:ts": "esbuild index.ts --platform=node --bundle --minify --outfile=dist/index.js",
+    "tailwind:prod": "postcss public/styles/index.css -o public/styles/style.css",
+    "copy:static": "xcopy /E /I public dist\\public && xcopy /E /I src\\views dist\\src\\views"
   },
   "repository": {
     "type": "git",
@@ -36,6 +38,9 @@
     "@types/node": "^20.9.0",
     "autoprefixer": "^10.4.16",
     "concurrently": "^8.2.2",
+    "esbuild": "^0.19.5",
+    "esbuild-node-tsc": "^2.0.5",
+    "nodemon": "^3.0.1",
     "postcss": "^8.4.31",
     "postcss-cli": "^10.1.0",
     "rimraf": "^5.0.5",
@@ -48,6 +53,7 @@
     "dotenv": "^16.3.1",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
-    "mongoose": "^8.0.0"
+    "mongoose": "^8.0.0",
+    "nanoid": "^3.3.7"
   }
 }

@@ -2,12 +2,11 @@ import mongoose from "mongoose";
 
 const urlSchema = new mongoose.Schema(
   {
-    _id: mongoose.Schema.Types.ObjectId,
     nanoId: { type: String, required: true },
     redirectUrl: { type: String, required: true },
-    visits: [{ timeStamp: { type: Date } }],
+    visits: { type: [{ timeStamp: { type: Date } }], default: [] },
   },
   { timestamps: true }
 );
 
-export default mongoose.model("url", urlSchema);
+export default mongoose.model("urls", urlSchema);

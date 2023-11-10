@@ -1,0 +1,7 @@
+{
+  "watch": ["src", "public"],
+  "ignore": ["src/**/*.test.ts", "node_modules"],
+  "ext": "ts,ejs,js,json",
+  "exec": "etsc && node ./dist/index.js",
+  "legacyWatch": true
+}
