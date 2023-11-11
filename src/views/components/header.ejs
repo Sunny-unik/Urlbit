@@ -1,6 +1,6 @@
-<nav class="bg-gray-800">
+<nav>
   <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-    <div class="relative flex h-16 items-center justify-between">
+    <div class="relative flex h-[4.5rem] items-center justify-between">
       <div class="absolute inset-y-0 right-0 flex items-center sm:hidden">
         <button
           type="button"
@@ -43,26 +43,20 @@
       <div
         class="flex flex-1 items-center justify-start sm:items-center sm:justify-between"
       >
-        <div class="flex flex-shrink-0 items-center bg-white rounded">
+        <div class="flex items-center bg-white rounded">
           <a href="/">
-            <img
-              src="logo.webp"
-              class="h-8 w-auto"
-              alt="Urlbit Logo"
-              width="80px"
-              height="40px"
-            />
+            <img src="logo.svg" class="h-10 w-auto" alt="Urlbit Logo" />
           </a>
         </div>
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
             <a
-              class="rounded-md px-3 py-2 text-sm font-medium <%= 'about'===activePage ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' %>"
+              class="rounded-md px-3 underline-offset-4 py-2 text-lg font-medium font-mono <%= 'about'===activePage ? 'underline text-gray-900' : 'text-gray-500 hover:underline hover:text-gray-700' %>"
               href="/about"
               >About</a
             >
             <a
-              class="rounded-md px-3 py-2 text-sm font-medium <%= 'contact'===activePage ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' %>"
+              class="rounded-md px-3 underline-offset-4 py-2 text-lg font-medium font-mono <%= 'contact'===activePage ? 'underline text-gray-900' : 'text-gray-500 hover:underline hover:text-gray-700' %>"
               href="/contact"
               >Contact Us</a
             >
@@ -72,14 +66,14 @@
     </div>
   </div>
   <div class="sm:hidden" id="mobile-menu">
-    <div class="space-y-1 px-2 pb-3 pt-2">
+    <div class="space-y-1 text-center px-2 pb-3 pt-2">
       <a
-        class="block rounded-md px-3 py-2 text-base font-medium <%= 'about'===activePage ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' %>"
+        class="block rounded-md px-2 py-2 underline-offset-3 text-base font-medium font-mono <%= 'about'===activePage ? 'underline text-gray-900' : 'text-gray-500 hover:underline hover:text-gray-800' %>"
         href="/about"
         >About</a
       >
       <a
-        class="block rounded-md px-3 py-2 text-base font-medium <%= 'contact'===activePage ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' %>"
+        class="block rounded-md px-2 py-2 underline-offset-3 text-base font-medium font-mono <%= 'contact'===activePage ? 'underline text-gray-900' : 'text-gray-500 hover:underline hover:text-gray-800' %>"
         href="/contact"
         >Contact</a
       >
