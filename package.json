@@ -8,7 +8,7 @@
     "dev": "concurrently \"nodemon\" \"npm run tailwind:watch\"",
     "tailwind:watch": "postcss public/styles/index.css -o public/styles/style.css --watch",
     "build": "rimraf dist && npm run tailwind:prod && npm run compile:ts && npm run copy:static",
-    "compile:ts": "esbuild index.ts --platform=node --bundle --minify --outfile=dist/index.js",
+    "compile:ts": "esbuild index.ts --platform=node --bundle --minify --target=node14 --outfile=dist/index.js",
     "tailwind:prod": "postcss public/styles/index.css -o public/styles/style.css",
     "copy:static": "node staticFilesBuilder.js"
   },
@@ -19,7 +19,6 @@
   "keywords": [
     "urlbit",
     "url",
-    "graphql",
     "mongodb",
     "express",
     "node"
@@ -50,7 +49,7 @@
     "esbuild": "^0.19.5",
     "express": "^4.18.2",
     "fs-extra": "^11.1.1",
-    "mongoose": "^8.0.0",
+    "mongoose": "^6.0.0",
     "nanoid": "^3.3.7",
     "postcss-cli": "^10.1.0",
     "rimraf": "^5.0.5",
