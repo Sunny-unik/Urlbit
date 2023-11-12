@@ -10,7 +10,7 @@
       </header>
 
       <main class="container mx-auto">
-        <div class="relative isolate px-6 pt-14 lg:px-8">
+        <div class="relative px-6 pt-14 lg:px-8">
           <div
             class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
             aria-hidden="true"
@@ -51,20 +51,57 @@
                 Get your shorten link in milliseconds and its totally free.
               </p>
               <form
-                action=""
-                method="post"
-                class="mt-6 flex items-center justify-center gap-x-6"
+                id="uidForm"
+                class="mt-6 flex flex-col sm:flex-row items-center justify-center sm:gap-x-6 gap-y-2 sm:gap-y-0"
               >
                 <input
-                  class="block rounded-md w-[50%] border-0 py-1.5 pl-5 pr-5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  name="uidInput"
+                  class="block rounded-md w-[100%] sm:w-[50%] border-0 py-1.5 pl-5 pr-5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   placeholder="https://google.com"
                 />
                 <button
                   class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
-                  Generate Link <span aria-hidden="true">→</span>
+                  Generate Link
+                  <span class="hidden sm:inline" aria-hidden="true">→</span>
                 </button>
               </form>
+              <script>
+                document
+                  .querySelector("#uidForm")
+                  .addEventListener("submit", async (event) => {
+                    event.preventDefault();
+                    try {
+                      const redirectUrl = new FormData(event.target).get(
+                        "uidInput"
+                      );
+                      const urlRegex = new RegExp(
+                        "^(https?:\\/\\/)?" + // protocol
+                          "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
+                          "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR IP (v4) address
+                          "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
+                          "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+                          "(\\#[-a-z\\d_]*)?$",
+                        "i" // fragment locator
+                      );
+                      if (!urlRegex.test(redirectUrl))
+                        return alert("Entered Url is not valid");
+                      const response = await fetch("/api/saveUrl", {
+                        headers: { "Content-Type": "application/json" },
+                        method: "POST",
+                        body: JSON.stringify({ redirectUrl }),
+                      });
+                      const result = await response.json();
+                      if (!response.ok) throw result;
+                      console.log(result, "res");
+                    } catch ({ errors, code }) {
+                      const errorEntries = Object.entries(errors || {});
+                      errorEntries.forEach(([type, error]) =>
+                        alert(error.message)
+                      );
+                    }
+                  });
+              </script>
             </div>
           </div>
           <div

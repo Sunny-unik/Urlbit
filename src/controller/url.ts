@@ -1,6 +1,13 @@
 import urlSchema from "../models/url";
 import { nanoid } from "nanoid";
 
+function ErrorHelper(error: Error, name: string, code: number) {
+  return {
+    ...error,
+    code: error.name === name ? code : 500,
+  };
+}
+
 const urlController = {
   saveUrl: async (redirectUrl: string) => {
     try {
@@ -9,9 +16,9 @@ const urlController = {
         redirectUrl,
         nanoId: shortId,
       });
-      return { data: { shortId }, statusText: "success" };
+      return { data: { shortId }, code: 200 };
     } catch (error) {
-      return { error, statusText: "failed" };
+      return ErrorHelper(error as Error, "ValidationError", 400);
     }
   },
 
@@ -20,12 +27,11 @@ const urlController = {
       const redirectUrl = (
         await urlSchema.findOne({ nanoId: shortId }).select("redirectUrl")
       )?.redirectUrl;
-      const data = redirectUrl
-        ? { redirectUrl }
-        : { data: { message: "Page not found" } };
-      return { ...data, statusText: "success" };
+      if (!redirectUrl)
+        throw { message: "Requested resource not found", name: "NotFound" };
+      return { redirectUrl, code: 200 };
     } catch (error) {
-      return { error, statusText: "failed" };
+      return ErrorHelper(error as Error, "NotFound", 404);
     }
   },
 };
