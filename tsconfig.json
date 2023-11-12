@@ -3,6 +3,7 @@
     "typeRoots": ["./node_modules/@types"],
     "target": "ES6" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
     "lib": [
+      "DOM",
       "ES6",
       "ESNext",
       "ES2022"
