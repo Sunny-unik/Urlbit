@@ -10,7 +10,7 @@
     "build": "rimraf dist && npm run tailwind:prod && npm run compile:ts && npm run copy:static",
     "compile:ts": "esbuild index.ts --platform=node --bundle --minify --outfile=dist/index.js",
     "tailwind:prod": "postcss public/styles/index.css -o public/styles/style.css",
-    "copy:static": "xcopy /E /I /Y public dist\\public && xcopy /E /I /Y src\\views dist\\src\\views"
+    "copy:static": "node staticFilesBuilder.js"
   },
   "repository": {
     "type": "git",
@@ -49,6 +49,7 @@
     "ejs": "^3.1.9",
     "esbuild": "^0.19.5",
     "express": "^4.18.2",
+    "fs-extra": "^11.1.1",
     "mongoose": "^8.0.0",
     "nanoid": "^3.3.7",
     "postcss-cli": "^10.1.0",
