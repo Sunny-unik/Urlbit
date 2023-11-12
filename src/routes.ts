@@ -7,7 +7,7 @@ urlRouter.get("/", (req, res) => res.render("pages/home"));
 urlRouter.get("/about", (req, res) => res.render("pages/about"));
 urlRouter.get("/contact", (req, res) => res.render("pages/contact"));
 
-urlRouter.get("/api/:nanoid", async (req, res) => {
+urlRouter.get("/:nanoid", async (req, res) => {
   const resData = await urlController.getUrl(req.params.nanoid);
   const redirectUrl = (resData as { code: number; redirectUrl: string })
     .redirectUrl;

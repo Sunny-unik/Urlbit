@@ -11,3 +11,9 @@ body {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .box-success {
+    @apply p-2 my-2 bg-green-600 text-white font-semibold text-center rounded-md shadow-md mx-auto hover:bg-green-800 focus:outline-none;
+  }
+}

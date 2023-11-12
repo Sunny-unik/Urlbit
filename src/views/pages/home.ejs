@@ -38,43 +38,8 @@
                   <span class="hidden sm:inline" aria-hidden="true">→</span>
                 </button>
               </form>
-              <script>
-                document
-                  .querySelector("#uidForm")
-                  .addEventListener("submit", async (event) => {
-                    event.preventDefault();
-                    try {
-                      const redirectUrl = new FormData(event.target).get(
-                        "uidInput"
-                      );
-                      const urlRegex = new RegExp(
-                        "^(https?:\\/\\/)?" + // protocol
-                          "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
-                          "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR IP (v4) address
-                          "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
-                          "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
-                          "(\\#[-a-z\\d_]*)?$",
-                        "i" // fragment locator
-                      );
-                      if (!urlRegex.test(redirectUrl))
-                        return alert("Entered Url is not valid");
-                      const response = await fetch("/api/saveUrl", {
-                        headers: { "Content-Type": "application/json" },
-                        method: "POST",
-                        body: JSON.stringify({ redirectUrl }),
-                      });
-                      const result = await response.json();
-                      if (!response.ok) throw result;
-                      console.log(result, "res");
-                    } catch ({ errors, code }) {
-                      const errorEntries = Object.entries(errors || {});
-                      errorEntries.forEach(([type, error]) =>
-                        alert(error.message)
-                      );
-                    }
-                  });
-              </script>
             </div>
+            <div class="box-success urlBox hidden w-1/2"></div>
           </div>
         </div>
       </main>
@@ -82,4 +47,53 @@
       <footer><%- include('../components/footer'); %></footer>
     </div>
   </body>
+
+  <script>
+    const urlBox = document.querySelector(".urlBox");
+    document
+      .querySelector("#uidForm")
+      .addEventListener("submit", async (event) => {
+        event.preventDefault();
+        try {
+          const redirectUrl = new FormData(event.target).get("uidInput");
+          const urlRegex = new RegExp(
+            "^(https?:\\/\\/)?" + // protocol
+              "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
+              "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR IP (v4) address
+              "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
+              "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+              "(\\#[-a-z\\d_]*)?$",
+            "i" // fragment locator
+          );
+          if (!urlRegex.test(redirectUrl))
+            return alert("Entered Url is not valid");
+          const response = await fetch("/api/saveUrl", {
+            headers: { "Content-Type": "application/json" },
+            method: "POST",
+            body: JSON.stringify({ redirectUrl }),
+          });
+          const result = await response.json();
+          if (!response.ok) throw result;
+          const { shortId } = result.data;
+          if (!shortId) throw {};
+          const shortUrl = location.origin + "/" + shortId;
+          navigator.clipboard.writeText(shortUrl);
+          const allowRedirect = confirm(
+            "Short URL copied to your clipboard.\nDo you want to open short Url in new tab?"
+          );
+          if (allowRedirect) window.open(shortUrl, "_blank");
+          if (urlBox) {
+            urlBox.classList.remove("hidden");
+            urlBox.innerHTML = shortUrl;
+          }
+        } catch ({ errors, code }) {
+          const defaultError = { message: "Internal Server Error" };
+          const errorEntries = Object.entries(
+            errors || { default: defaultError }
+          );
+          urlBox && urlBox.classList.add("hidden");
+          errorEntries.forEach(([type, error]) => alert(error.message));
+        }
+      });
+  </script>
 </html>
