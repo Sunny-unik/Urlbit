@@ -39,7 +39,15 @@
                 </button>
               </form>
             </div>
-            <div class="box-success urlBox hidden w-1/2"></div>
+            <div class="w-full flex justify-center my-4 text-center">
+              <a class="box-success hidden urlBox w-1/2" target="_blank"></a>
+              <button
+                class="cpBtn hidden rounded-md mx-2 shadow-xl bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-600 hover:bg-gray-600 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+                type="button"
+              >
+                Copy Link
+              </button>
+            </div>
           </div>
         </div>
       </main>
@@ -50,6 +58,7 @@
 
   <script>
     const urlBox = document.querySelector(".urlBox");
+    const cpBtn = document.querySelector(".cpBtn");
     document
       .querySelector("#uidForm")
       .addEventListener("submit", async (event) => {
@@ -77,21 +86,28 @@
           const { shortId } = result.data;
           if (!shortId) throw {};
           const shortUrl = location.origin + "/" + shortId;
-          navigator.clipboard.writeText(shortUrl);
-          const allowRedirect = confirm(
-            "Short URL copied to your clipboard.\nDo you want to open short Url in new tab?"
-          );
-          if (allowRedirect) window.open(shortUrl, "_blank");
-          if (urlBox) {
-            urlBox.classList.remove("hidden");
-            urlBox.innerHTML = shortUrl;
-          }
+          cpBtn.classList.remove("hidden");
+          urlBox.classList.remove("hidden");
+          urlBox.classList.add("block");
+          urlBox.href = shortUrl;
+          urlBox.innerHTML = shortUrl;
+          cpBtn.addEventListener("click", async () => {
+            const writeClipboard = await navigator.permissions.query({
+              name: "clipboard-write",
+            });
+            if (writeClipboard.state === "denied")
+              return alert("Please grant write permission to clipboard");
+            await navigator.clipboard.writeText(shortUrl);
+            alert("Short link copied to your clipboard");
+          });
         } catch ({ errors, code }) {
           const defaultError = { message: "Internal Server Error" };
           const errorEntries = Object.entries(
             errors || { default: defaultError }
           );
-          urlBox && urlBox.classList.add("hidden");
+          cpBtn.classList.add("hidden");
+          urlBox.classList.add("hidden");
+          urlBox.classList.remove("block");
           errorEntries.forEach(([type, error]) => alert(error.message));
         }
       });
