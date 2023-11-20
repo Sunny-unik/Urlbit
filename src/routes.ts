@@ -1,6 +1,7 @@
 import { Router } from "express";
 import urlController from "./controller/url";
 import transporter from "./utils/mailService";
+import { escapeHTML } from "./utils/escapeHTML";
 
 const urlRouter = Router();
 
@@ -27,8 +28,8 @@ urlRouter.post("/contact", (req, res) => {
   const mailOptions = {
     from: process.env.SENDER,
     to: process.env.RECEPIENT,
-    subject: title,
-    text: description,
+    subject: escapeHTML(title),
+    text: escapeHTML(description),
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
