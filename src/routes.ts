@@ -1,5 +1,6 @@
 import { Router } from "express";
 import urlController from "./controller/url";
+import transporter from "./utils/mailService";
 
 const urlRouter = Router();
 
@@ -20,6 +21,23 @@ urlRouter.post("/api/saveUrl", async (req, res) => {
   const resData = await urlController.saveUrl(req.body.redirectUrl);
   res.status(resData.code).send(resData);
 });
-urlRouter.post("/contact", (req, res) => console.log(req.body));
+urlRouter.post("/contact", (req, res) => {
+  const { title, description } = req.body
+
+  const mailOptions = {
+    from: process.env.SENDER,
+    to: process.env.RECEPIENT,
+    subject: title,
+    text: description,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error('Error sending email:', error);
+    } else {
+      console.log('Email sent:', info.response);
+    }
+  });
+});
 
 export default urlRouter;
