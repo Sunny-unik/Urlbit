@@ -46,11 +46,9 @@
     })
       .then(response => response.json())
       .then(data => {
-        // Handle the response from the server
         console.log(data);
       })
       .catch(error => {
-        // Handle errors
         console.error('Error:', error);
       });
   });
