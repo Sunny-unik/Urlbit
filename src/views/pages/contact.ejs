@@ -44,13 +44,13 @@
       },
       body: formDataString
     })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
+      .then(() => {
+        title.value = ""
+        description.value = ""
       })
       .catch(error => {
         console.error('Error:', error);
-      });
+      })
   });
 </script>
 
