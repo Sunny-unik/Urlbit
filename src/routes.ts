@@ -20,5 +20,6 @@ urlRouter.post("/api/saveUrl", async (req, res) => {
   const resData = await urlController.saveUrl(req.body.redirectUrl);
   res.status(resData.code).send(resData);
 });
+urlRouter.post("/contact", (req, res) => console.log(req.body));
 
 export default urlRouter;
