@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { marked } from "marked"
 import urlController from "./controller/url";
 import transporter from "./utils/mailService";
 import { escapeHTML } from "./utils/escapeHTML";
@@ -24,12 +25,13 @@ urlRouter.post("/api/saveUrl", async (req, res) => {
 });
 urlRouter.post("/contact", (req, res) => {
   const { title, description } = req.body
+  const htmlContent = marked(escapeHTML(description));
 
   const mailOptions = {
     from: process.env.SENDER,
     to: process.env.RECEPIENT,
     subject: escapeHTML(title),
-    text: escapeHTML(description),
+    htmlContent
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
@@ -37,6 +39,7 @@ urlRouter.post("/contact", (req, res) => {
       console.error('Error sending email:', error);
     } else {
       console.log('Email sent:', info.response);
+      res.status(200)
     }
   });
 });
