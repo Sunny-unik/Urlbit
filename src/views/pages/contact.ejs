@@ -44,10 +44,6 @@
       },
       body: formDataString
     })
-      .then(() => {
-        title.value = ""
-        description.value = ""
-      })
       .catch(error => {
         console.error('Error:', error);
       })
