@@ -1,5 +1,5 @@
 {
-  "watch": ["src", "public"],
+  "watch": ["src", "public", "index.ts"],
   "ignore": ["src/**/*.test.ts", "node_modules"],
   "ext": "ts,ejs,js,json",
   "exec": "etsc && npm run copy:static && node ./dist/index.js ",
