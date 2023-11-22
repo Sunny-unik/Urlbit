@@ -12,13 +12,12 @@ const port = process.env.PORT || 4000;
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "src/views"));
+
 app.use(express.static(__dirname + "/public"));
 app.use(cors());
 app.use(express.json());
 app.use("/", urlRouter);
 
-app.get("/health", (req, res) => {
-  res.status(200).send({ message: "All Good :-)" });
-});
+app.get("/health", (req, res) => res.status(200).send("OK"));
 
 app.listen(port, () => console.log(`Server runs on http://localhost:${port}`));

@@ -1,25 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <%- include('../components/head'); %>
-  </head>
-  <body>
-    <div class="bg-light">
-      <header>
-        <%- include('../components/header', {activePage:"contact"}); %>
-      </header>
 
-      <main class="container mx-auto">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="jumbotron">
-              <h1>This service isn't working for now</h1>
-            </div>
+<head>
+  <%- include('../components/head' ,{ title: "Urlbit - Contact Page" }); %>
+</head>
+
+<body>
+  <div class="bg-light">
+    <header>
+      <%- include('../components/header', { activePage: "contact" }); %>
+    </header>
+
+    <main class="container mx-auto">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="jumbotron">
+            <%- include('../components/contactForm', { activePage: "contact" }); %>
           </div>
         </div>
-      </main>
+      </div>
+    </main>
 
-      <footer><%- include('../components/footer'); %></footer>
-    </div>
-  </body>
+    <footer><%- include('../components/footer'); %></footer>
+  </div>
+</body>
+<script>
+  document.getElementById('contactform').addEventListener('submit', function (event) {
+    event.preventDefault();
+    const title = document.getElementById('title').value;
+    const description = document.getElementById('description').value;
+
+    const formData = {
+      title: title,
+      description: description
+    };
+
+    const formDataString = JSON.stringify(formData);
+
+    fetch('/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: formDataString
+    })
+      .catch(error => {
+        console.error('Error:', error);
+      })
+  });
+</script>
+
 </html>
