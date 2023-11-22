@@ -21,4 +21,10 @@ urlRouter.post("/api/saveUrl", async (req, res) => {
   res.status(resData.code).send(resData);
 });
 
+urlRouter.post("/api/contact", async (req, res) => {
+  const { title, description } = req.body;
+  const resData = await urlController.contactMail(title, description);
+  res.status(resData.code).send(resData);
+});
+
 export default urlRouter;

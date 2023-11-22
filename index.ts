@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import ConnectDB from "./src/db";
 import urlRouter from "./src/routes";
 import path from "path";
+import { timeOutMiddleware } from "./src/middlewares";
 
 dotenv.config();
 ConnectDB();
@@ -16,6 +17,7 @@ app.set("views", path.join(__dirname, "src/views"));
 app.use(express.static(__dirname + "/public"));
 app.use(cors());
 app.use(express.json());
+app.use(timeOutMiddleware);
 app.use("/", urlRouter);
 
 app.get("/health", (req, res) => res.status(200).send("OK"));
