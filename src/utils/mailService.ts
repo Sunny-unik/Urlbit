@@ -1,16 +1,25 @@
 import nodemailer from "nodemailer";
-import dotenv from "dotenv";
-dotenv.config()
 
-const transporter = nodemailer.createTransport({
-    service: process.env.SERVICE_PROVIDER,
-    host: process.env.HOST,
-    port: 587,
-    secure: false,
-    auth: {
-        user: process.env.USER,
-        pass: process.env.PASSWORD,
-    },
-});
+interface InterfaceMailOptions {
+  from: string;
+  to: string;
+  subject: string;
+  html: string;
+}
 
-export default transporter
+const sendMail = (mailOptions: InterfaceMailOptions, appPassword: string) => {
+  return new Promise((resolve, reject) => {
+    const transporter = nodemailer.createTransport({
+      host: process.env.MAIL_HOST,
+      port: 587,
+      secure: false,
+      auth: { user: mailOptions.from, pass: appPassword },
+    });
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      error ? reject(error) : resolve(info);
+    });
+  });
+};
+
+export default sendMail;

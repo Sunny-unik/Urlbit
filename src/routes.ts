@@ -1,8 +1,5 @@
 import { Router } from "express";
-import { marked } from "marked"
 import urlController from "./controller/url";
-import transporter from "./utils/mailService";
-import { escapeHTML } from "./utils/escapeHTML";
 
 const urlRouter = Router();
 
@@ -23,25 +20,11 @@ urlRouter.post("/api/saveUrl", async (req, res) => {
   const resData = await urlController.saveUrl(req.body.redirectUrl);
   res.status(resData.code).send(resData);
 });
-urlRouter.post("/contact", (req, res) => {
-  const { title, description } = req.body
-  const htmlContent = marked(escapeHTML(description));
 
-  const mailOptions = {
-    from: process.env.SENDER,
-    to: process.env.RECEPIENT,
-    subject: escapeHTML(title),
-    htmlContent
-  };
-
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error('Error sending email:', error);
-    } else {
-      console.log('Email sent:', info.response);
-      res.status(200)
-    }
-  });
+urlRouter.post("/contact", async (req, res) => {
+  const { title, description } = req.body;
+  const resData = await urlController.contactMail(title, description);
+  res.status(resData.code).send(resData);
 });
 
 export default urlRouter;
