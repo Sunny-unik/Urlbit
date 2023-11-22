@@ -43,10 +43,15 @@
           headers: { "Content-Type": "application/json" },
           body: formDataString,
         });
-        const { data } = await response.json();
+        const { data, message, name, code } = await response.json();
+        if (!data) throw { message, name, code };
         alert(data.message);
       } catch (error) {
-        alert("This service isn't working now, try later");
+        alert(
+          error.name === "REQUESTTIMEOUT"
+            ? error.message
+            : "This service isn't working now, try later"
+        );
       } finally {
         formButton.disabled = false;
         formButton.value = "Submit";
