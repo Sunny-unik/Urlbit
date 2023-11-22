@@ -1,53 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <%- include('../components/head' ,{ title: "Urlbit - Contact Page" }); %>
+  </head>
 
-<head>
-  <%- include('../components/head' ,{ title: "Urlbit - Contact Page" }); %>
-</head>
+  <body>
+    <div class="bg-light">
+      <header>
+        <%- include('../components/header', { activePage: "contact" }); %>
+      </header>
 
-<body>
-  <div class="bg-light">
-    <header>
-      <%- include('../components/header', { activePage: "contact" }); %>
-    </header>
-
-    <main class="container mx-auto">
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="jumbotron">
-            <%- include('../components/contactForm', { activePage: "contact" }); %>
+      <main class="container mx-auto">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="jumbotron">
+              <%- include('../components/contactForm', { activePage: "contact"
+              }); %>
+            </div>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
 
-    <footer><%- include('../components/footer'); %></footer>
-  </div>
-</body>
-<script>
-  document.getElementById('contactform').addEventListener('submit', function (event) {
-    event.preventDefault();
-    const title = document.getElementById('title').value;
-    const description = document.getElementById('description').value;
+      <footer><%- include('../components/footer'); %></footer>
+    </div>
+  </body>
 
-    const formData = {
-      title: title,
-      description: description
-    };
-
-    const formDataString = JSON.stringify(formData);
-
-    fetch('/contact', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: formDataString
-    })
-      .catch(error => {
-        console.error('Error:', error);
-      })
-  });
-</script>
-
+  <script>
+    const contactForm = document.querySelector("#contactForm");
+    contactForm.addEventListener("submit", async function (event) {
+      event.preventDefault();
+      const [{ value: title }, { value: description }, formButton] =
+        contactForm.querySelectorAll("#title, #description, #submit");
+      const formDataString = JSON.stringify({ title, description });
+      try {
+        formButton.disabled = true;
+        formButton.value = "loading...";
+        formButton.style.cursor = "default";
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: formDataString,
+        });
+        const { data } = await response.json();
+        alert(data.message);
+      } catch (error) {
+        alert("This service isn't working now, try later");
+      } finally {
+        formButton.disabled = true;
+        formButton.value = "Submit";
+        formButton.style.cursor = "pointer";
+      }
+    });
+  </script>
 </html>
