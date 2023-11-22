@@ -31,6 +31,8 @@
       event.preventDefault();
       const [{ value: title }, { value: description }, formButton] =
         contactForm.querySelectorAll("#title, #description, #submit");
+      if (!title) return alert("Title is required.");
+      if (!description) return alert("Description is required.");
       const formDataString = JSON.stringify({ title, description });
       try {
         formButton.disabled = true;
@@ -46,7 +48,7 @@
       } catch (error) {
         alert("This service isn't working now, try later");
       } finally {
-        formButton.disabled = true;
+        formButton.disabled = false;
         formButton.value = "Submit";
         formButton.style.cursor = "pointer";
       }
