@@ -10,7 +10,9 @@
     "build": "rimraf dist && npm run tailwind:prod && npm run compile:ts && npm run copy:static",
     "compile:ts": "esbuild index.ts --platform=node --bundle --minify --outfile=dist/index.js",
     "tailwind:prod": "postcss public/styles/index.css -o public/styles/style.css",
-    "copy:static": "node staticFilesBuilder.js"
+    "copy:static": "node staticFilesBuilder.js",
+    "lint": "npx eslint .",
+    "lint:fix": "npx eslint . --fix"
   },
   "repository": {
     "type": "git",
@@ -38,10 +40,18 @@
     "@types/express": "^4.17.21",
     "@types/node": "^20.9.0",
     "@types/nodemailer": "^6.4.14",
+    "@typescript-eslint/eslint-plugin": "^6.12.0",
+    "@typescript-eslint/parser": "^6.12.0",
     "concurrently": "^8.2.2",
     "esbuild-node-tsc": "^2.0.5",
+    "eslint": "^8.54.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-check-file": "^2.6.2",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-prettier": "^5.0.1",
     "nodemon": "^3.0.1",
     "postcss": "^8.4.31",
+    "prettier": "^3.1.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.2.2"
   },
