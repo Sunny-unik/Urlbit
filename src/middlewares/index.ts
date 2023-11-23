@@ -18,7 +18,7 @@ export function timeOutMiddleware(
     res.send({
       code: 408,
       name: "REQUESTTIMEOUT",
-      message: "Request has timed out",
+      message: "Request has timed out"
     });
   });
   next();
