@@ -11,8 +11,10 @@
     "compile:ts": "esbuild index.ts --platform=node --bundle --minify --outfile=dist/index.js",
     "tailwind:prod": "postcss public/styles/index.css -o public/styles/style.css",
     "copy:static": "node staticFiles.config.js",
-    "lint": "npx eslint .",
-    "lint:fix": "npx eslint . --fix"
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prettier": "prettier --check .",
+    "prettier:fix": "prettier --write ."
   },
   "repository": {
     "type": "git",
