@@ -10,7 +10,7 @@
     "build": "rimraf dist && npm run tailwind:prod && npm run compile:ts && npm run copy:static",
     "compile:ts": "esbuild index.ts --platform=node --bundle --minify --outfile=dist/index.js",
     "tailwind:prod": "postcss public/styles/index.css -o public/styles/style.css",
-    "copy:static": "node staticFilesBuilder.js",
+    "copy:static": "node staticFiles.config.js",
     "lint": "npx eslint .",
     "lint:fix": "npx eslint . --fix"
   },

@@ -17,7 +17,7 @@ module.exports = {
       extends: ["plugin:@typescript-eslint/disable-type-checked"]
     }
   ],
-  ignorePatterns: ["**.js", "package*.json", "*.config.js", "dist/**", "*.ejs"],
+  ignorePatterns: [".*.js", "package*.json", "*.config.js", "dist/**", "*.ejs"],
   root: true,
   rules: {
     semi: ["error", "always"],
