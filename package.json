@@ -11,11 +11,11 @@
     "compile:ts": "esbuild index.ts --platform=node --bundle --minify --outfile=dist/index.js",
     "tailwind:prod": "postcss public/styles/index.css -o public/styles/style.css",
     "copy:static": "node staticFiles.config.js",
+    "deadCode": "ts-prune --error",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write .",
-    "pre-commit": "husky run lint:fix && husky run prettier:fix",
     "prepare": "husky install"
   },
   "repository": {
@@ -58,6 +58,7 @@
     "postcss": "^8.4.31",
     "prettier": "^3.1.0",
     "ts-node-dev": "^2.0.0",
+    "ts-prune": "^0.10.3",
     "typescript": "^5.2.2"
   },
   "dependencies": {

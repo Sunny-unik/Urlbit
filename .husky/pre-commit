@@ -1,4 +1,14 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run pre-commit
+echo '🕵️‍♂️🕵️‍♂️ starting deadCode:check 🕵️‍♂️🕵️‍♂️'
+npm run deadCode || (echo '🤢🤮🤢 deadCode failed 🤢🤮🤢'; false)
+echo '✅✅ deadCode:check passed ✅✅'
+
+echo '🕵️‍♂️🕵️‍♂️ starting lint:check 🕵️‍♂️🕵️‍♂️'
+npm run lint || (echo '🤢🤮🤢 lint failed 🤢🤮🤢'; false);
+echo '✅✅ lint:check passed ✅✅'
+
+echo '🕵️‍♂️🕵️‍♂️ starting prettier:check 🕵️‍♂️🕵️‍♂️'
+npm run prettier || (echo '🤢🤮🤢 prettier failed 🤢🤮🤢'; false)
+echo '✅✅ prettier:check passed ✅✅'
