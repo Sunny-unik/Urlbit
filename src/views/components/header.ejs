@@ -1,11 +1,8 @@
 <nav>
   <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
     <div class="relative isolate flex h-[4.5rem] items-center justify-between">
-      <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-60"
-        aria-hidden="true">
-        <div
-          class="relative pointer-events-none left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-          style="
+      <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-60" aria-hidden="true">
+        <div class="relative pointer-events-none left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" style="
             clip-path: polygon(
               74.1% 44.1%,
               100% 61.6%,
@@ -27,17 +24,13 @@
           "></div>
       </div>
       <div class="absolute inset-y-0 right-0 flex items-center sm:hidden">
-        <button type="button" id="toggle-button" onclick="toggleMenu()"
-          class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-          aria-controls="mobile-menu" aria-expanded="false">
+        <button type="button" id="toggle-button" onclick="toggleMenu()" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
           <span class="absolute -inset-0.5"></span>
           <span class="sr-only">Open main menu</span>
-          <svg class="block h-6 w-6 open-menu-svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-            stroke="currentColor" aria-hidden="true">
+          <svg class="block h-6 w-6 open-menu-svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
           </svg>
-          <svg class="hidden h-6 w-6 close-menu-svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-            stroke="currentColor" aria-hidden="true">
+          <svg class="hidden h-6 w-6 close-menu-svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
@@ -50,10 +43,8 @@
         </div>
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
-            <a class="rounded-md px-3 underline-offset-4 py-2 text-lg font-medium font-mono <%= 'about'===activePage ? 'underline text-gray-900' : 'text-gray-500 hover:underline hover:text-gray-700' %>"
-              href="/about">About</a>
-            <a class="rounded-md px-3 underline-offset-4 py-2 text-lg font-medium font-mono <%= 'contact'===activePage ? 'underline text-gray-900' : 'text-gray-500 hover:underline hover:text-gray-700' %>"
-              href="/contact">Contact Us</a>
+            <a class="rounded-md px-3 underline-offset-4 py-2 text-lg font-medium font-mono <%= 'about'===activePage ? 'underline text-gray-900' : 'text-gray-500 hover:underline hover:text-gray-700' %>" href="/about">About</a>
+            <a class="rounded-md px-3 underline-offset-4 py-2 text-lg font-medium font-mono <%= 'contact'===activePage ? 'underline text-gray-900' : 'text-gray-500 hover:underline hover:text-gray-700' %>" href="/contact">Contact Us</a>
           </div>
         </div>
       </div>
@@ -61,15 +52,13 @@
   </div>
   <div class="relative sm:hidden hidden" id="mobile-menu">
     <div class="absolute w-full z-10  bg-blue-200 space-y-1 text-center px-2 pb-3 pt-2">
-      <a class="cursor-pointer block rounded-md px-2 py-2 underline-offset-3 text-base font-medium font-mono <%= 'about'===activePage ? 'underline text-gray-900' : 'text-gray-500 hover:underline hover:text-gray-800' %>"
-        href="/about">About</a>
-      <a class="cursor-pointer block rounded-md px-2 py-2 underline-offset-3 text-base font-medium font-mono <%= 'contact'===activePage ? 'underline text-gray-900' : 'text-gray-500 hover:underline hover:text-gray-800' %>"
-        href="/contact">Contact</a>
+      <a class="cursor-pointer block rounded-md px-2 py-2 underline-offset-3 text-base font-medium font-mono <%= 'about'===activePage ? 'underline text-gray-900' : 'text-gray-500 hover:underline hover:text-gray-800' %>" href="/about">About</a>
+      <a class="cursor-pointer block rounded-md px-2 py-2 underline-offset-3 text-base font-medium font-mono <%= 'contact'===activePage ? 'underline text-gray-900' : 'text-gray-500 hover:underline hover:text-gray-800' %>" href="/contact">Contact</a>
     </div>
   </div>
   <script async defer>
     function toggleMenu() {
-      const openMenuSvg = document.querySelector(".open-menu-svg")
+      const openMenuSvg = document.querySelector(".open-menu-svg");
       const closeMenuSvg = document.querySelector(".close-menu-svg");
       const MobileMenu = document.querySelector("#mobile-menu");
 

@@ -1,115 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <%- include('../components/head', { title: 'Urlbit - Home Page' }); %>
-  </head>
-  <body>
-    <div class="bg-light">
-      <header>
-        <%- include('../components/header', { activePage: "home" }); %>
-      </header>
 
-      <main class="container mx-auto">
-        <div class="relative px-6 pt-14 lg:px-8">
-          <div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
-            <div class="text-center">
-              <h1
-                class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl"
-              >
-                A better way to share your links
-              </h1>
-              <br />
-              <p class="mt-6 text-lg leading-8 text-gray-600">
-                Get your shorten link in milliseconds and its totally free.
-              </p>
-              <form
-                id="uidForm"
-                class="mt-6 flex flex-col sm:flex-row items-center justify-center sm:gap-x-6 gap-y-2 sm:gap-y-0"
-              >
-                <input
-                  name="uidInput"
-                  class="block rounded-md w-full sm:w-1/2 border-0 py-1.5 pl-5 pr-5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  placeholder="https://google.com"
-                />
-                <button
-                  class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                >
-                  Generate Link
-                  <span class="hidden sm:inline" aria-hidden="true">→</span>
-                </button>
-              </form>
-            </div>
-            <div class="w-full flex justify-center my-4 text-center">
-              <a class="box-success hidden urlBox w-1/2" target="_blank"></a>
-              <button
-                class="cpBtn hidden rounded-md mx-2 shadow-xl bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-600 hover:bg-gray-600 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
-                type="button"
-              >
-                Copy Link
+<head>
+  <%- include('../components/head', { title: 'Urlbit - Home Page' }); %>
+</head>
+
+<body>
+  <div class="bg-light">
+    <header>
+      <%- include('../components/header', { activePage: "home" }); %>
+    </header>
+
+    <main class="container mx-auto">
+      <div class="relative px-6 pt-14 lg:px-8">
+        <div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+          <div class="text-center">
+            <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+              A better way to share your links
+            </h1>
+            <br />
+            <p class="mt-6 text-lg leading-8 text-gray-600">
+              Get your shorten link in milliseconds and its totally free.
+            </p>
+            <form id="uidForm" class="mt-6 flex flex-col sm:flex-row items-center justify-center sm:gap-x-6 gap-y-2 sm:gap-y-0">
+              <input name="uidInput" class="block rounded-md w-full sm:w-1/2 border-0 py-1.5 pl-5 pr-5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="https://google.com" />
+              <button class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                Generate Link
+                <span class="hidden sm:inline" aria-hidden="true">→</span>
               </button>
-            </div>
+            </form>
+          </div>
+          <div class="w-full flex justify-center my-4 text-center">
+            <a class="box-success hidden urlBox w-1/2" target="_blank"></a>
+            <button class="cpBtn hidden rounded-md mx-2 shadow-xl bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-600 hover:bg-gray-600 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600" type="button">
+              Copy Link
+            </button>
           </div>
         </div>
-      </main>
+      </div>
+    </main>
 
-      <footer><%- include('../components/footer'); %></footer>
-    </div>
-  </body>
+    <footer><%- include('../components/footer'); %></footer>
+  </div>
+</body>
 
-  <script>
-    const urlBox = document.querySelector(".urlBox");
-    const cpBtn = document.querySelector(".cpBtn");
-    document
-      .querySelector("#uidForm")
-      .addEventListener("submit", async (event) => {
-        event.preventDefault();
-        try {
-          const redirectUrl = new FormData(event.target).get("uidInput");
-          const urlRegex = new RegExp(
-            "^(https?:\\/\\/)?" + // protocol
-              "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
-              "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR IP (v4) address
-              "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
-              "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
-              "(\\#[-a-z\\d_]*)?$",
-            "i" // fragment locator
-          );
-          if (!urlRegex.test(redirectUrl))
-            return alert("Entered Url is not valid");
-          const response = await fetch("/api/saveUrl", {
-            headers: { "Content-Type": "application/json" },
-            method: "POST",
-            body: JSON.stringify({ redirectUrl }),
+<script>
+  const urlBox = document.querySelector(".urlBox");
+  const cpBtn = document.querySelector(".cpBtn");
+  document
+    .querySelector("#uidForm")
+    .addEventListener("submit", async (event) => {
+      event.preventDefault();
+      try {
+        const redirectUrl = new FormData(event.target).get("uidInput");
+        const urlRegex = new RegExp(
+          "^(https?:\\/\\/)?" + // protocol
+          "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
+          "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR IP (v4) address
+          "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
+          "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+          "(\\#[-a-z\\d_]*)?$",
+          "i" // fragment locator
+        );
+        if (!urlRegex.test(redirectUrl))
+          return alert("Entered Url is not valid");
+        const response = await fetch("/api/saveUrl", {
+          headers: {
+            "Content-Type": "application/json"
+          },
+          method: "POST",
+          body: JSON.stringify({
+            redirectUrl
+          }),
+        });
+        const result = await response.json();
+        if (!response.ok) throw result;
+        const {
+          shortId
+        } = result.data;
+        if (!shortId) throw {};
+        const shortUrl = location.origin + "/" + shortId;
+        cpBtn.classList.remove("hidden");
+        urlBox.classList.remove("hidden");
+        urlBox.classList.add("block");
+        urlBox.href = shortUrl;
+        urlBox.innerHTML = shortUrl;
+        cpBtn.addEventListener("click", async () => {
+          const writeClipboard = await navigator.permissions.query({
+            name: "clipboard-write",
           });
-          const result = await response.json();
-          if (!response.ok) throw result;
-          const { shortId } = result.data;
-          if (!shortId) throw {};
-          const shortUrl = location.origin + "/" + shortId;
-          cpBtn.classList.remove("hidden");
-          urlBox.classList.remove("hidden");
-          urlBox.classList.add("block");
-          urlBox.href = shortUrl;
-          urlBox.innerHTML = shortUrl;
-          cpBtn.addEventListener("click", async () => {
-            const writeClipboard = await navigator.permissions.query({
-              name: "clipboard-write",
-            });
-            if (writeClipboard.state === "denied")
-              return alert("Please grant write permission to clipboard");
-            await navigator.clipboard.writeText(shortUrl);
-            alert("Short link copied to your clipboard");
-          });
-        } catch ({ errors, code }) {
-          const defaultError = { message: "Internal Server Error" };
-          const errorEntries = Object.entries(
-            errors || { default: defaultError }
-          );
-          cpBtn.classList.add("hidden");
-          urlBox.classList.add("hidden");
-          urlBox.classList.remove("block");
-          errorEntries.forEach(([type, error]) => alert(error.message));
-        }
-      });
-  </script>
+          if (writeClipboard.state === "denied")
+            return alert("Please grant write permission to clipboard");
+          await navigator.clipboard.writeText(shortUrl);
+          alert("Short link copied to your clipboard");
+        });
+      } catch ({
+        errors,
+        code
+      }) {
+        const defaultError = {
+          message: "Internal Server Error"
+        };
+        const errorEntries = Object.entries(
+          errors || {
+            default: defaultError
+          }
+        );
+        cpBtn.classList.add("hidden");
+        urlBox.classList.add("hidden");
+        urlBox.classList.remove("block");
+        errorEntries.forEach(([type, error]) => alert(error.message));
+      }
+    });
+</script>
+
 </html>
