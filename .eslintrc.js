@@ -61,6 +61,8 @@ module.exports = {
     complexity: ["error", 10],
     "import/first": "error",
     "import/newline-after-import": "error",
-    "import/no-duplicates": ["error", { "prefer-inline": true }]
+    "import/no-duplicates": ["error", { "prefer-inline": true }],
+    "no-multiple-empty-lines": "error",
+    "prefer-const": "error"
   }
 };
