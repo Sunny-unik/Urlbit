@@ -20,6 +20,7 @@ app.use(express.json());
 app.use(timeOutMiddleware);
 app.use("/", urlRouter);
 
-app.get("/health", (req, res) => res.status(200).send("OK"));
+app.get("/health", (_req, res) => res.status(200).send("OK"));
 
+// eslint-disable-next-line no-console
 app.listen(port, () => console.log(`Server runs on http://localhost:${port}`));

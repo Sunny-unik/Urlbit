@@ -1,62 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <%- include('../components/head' ,{ title: "Urlbit - Contact Page" }); %>
-  </head>
 
-  <body>
-    <div class="bg-light">
-      <header>
-        <%- include('../components/header', { activePage: "contact" }); %>
-      </header>
+<head>
+  <%- include('../components/head' ,{ title: "Urlbit - Contact Page" }); %>
+</head>
 
-      <main class="container mx-auto">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="jumbotron">
-              <%- include('../components/contactForm', { activePage: "contact"
+<body>
+  <div class="bg-light">
+    <header>
+      <%- include('../components/header', { activePage: "contact" }); %>
+    </header>
+
+    <main class="container mx-auto">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="jumbotron">
+            <%- include('../components/contactForm', { activePage: "contact"
               }); %>
-            </div>
           </div>
         </div>
-      </main>
+      </div>
+    </main>
 
-      <footer><%- include('../components/footer'); %></footer>
-    </div>
-  </body>
+    <footer><%- include('../components/footer'); %></footer>
+  </div>
+</body>
 
-  <script>
-    const contactForm = document.querySelector("#contactForm");
-    contactForm.addEventListener("submit", async function (event) {
-      event.preventDefault();
-      const [{ value: title }, { value: description }, formButton] =
-        contactForm.querySelectorAll("#title, #description, #submit");
-      if (!title) return alert("Title is required.");
-      if (!description) return alert("Description is required.");
-      const formDataString = JSON.stringify({ title, description });
-      try {
-        formButton.disabled = true;
-        formButton.value = "loading...";
-        formButton.style.cursor = "default";
-        const response = await fetch("/api/contact", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: formDataString,
-        });
-        const { data, message, name, code } = await response.json();
-        if (!data) throw { message, name, code };
-        alert(data.message);
-      } catch (error) {
-        alert(
-          error.name === "REQUESTTIMEOUT"
-            ? error.message
-            : "This service isn't working now, try later"
-        );
-      } finally {
-        formButton.disabled = false;
-        formButton.value = "Submit";
-        formButton.style.cursor = "pointer";
-      }
+<script>
+  const contactForm = document.querySelector("#contactForm");
+  contactForm.addEventListener("submit", async function(event) {
+    event.preventDefault();
+    const [{
+      value: title
+    }, {
+      value: description
+    }, formButton] =
+    contactForm.querySelectorAll("#title, #description, #submit");
+    if (!title) return alert("Title is required.");
+    if (!description) return alert("Description is required.");
+    const formDataString = JSON.stringify({
+      title,
+      description
     });
-  </script>
+    try {
+      formButton.disabled = true;
+      formButton.value = "loading...";
+      formButton.style.cursor = "default";
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: formDataString,
+      });
+      const {
+        data,
+        message,
+        name,
+        code
+      } = await response.json();
+      if (!data) throw {
+        message,
+        name,
+        code
+      };
+      alert(data.message);
+    } catch (error) {
+      alert(
+        error.name === "REQUESTTIMEOUT" ?
+        error.message :
+        "This service isn't working now, try later"
+      );
+    } finally {
+      formButton.disabled = false;
+      formButton.value = "Submit";
+      formButton.style.cursor = "pointer";
+    }
+  });
+</script>
+
 </html>

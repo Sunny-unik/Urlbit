@@ -1,40 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <%- include('../components/head', { title: "Urlbit - About Page" }); %>
-  </head>
-  <body>
-    <div class="bg-light">
-      <header>
-        <%- include('../components/header', { activePage: "about" }); %>
-      </header>
 
-      <main class="container mx-auto">
-        <div class="row">
-          <div class="col-sm-8">
-            <div class="jumbotron">
-              <h1>Great to see you here</h1>
-              <h6>
-                Our service can help you to make your urls short that ease urls
-                sharing
-              </h6>
-              <br />
-            </div>
-          </div>
+<head>
+  <%- include('../components/head', { title: "Urlbit - About Page" }); %>
+</head>
 
-          <div class="col-sm-4">
-            <div class="well">
-              <h5>Upcoming Features:</h5>
-              <ul>
-                <li>Analytics</li>
-                <li>Contact Us</li>
-              </ul>
-            </div>
+<body>
+  <div class="bg-light">
+    <header>
+      <%- include('../components/header', { activePage: "about" }); %>
+    </header>
+
+    <main class="container mx-auto">
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="jumbotron">
+            <h1>Great to see you here</h1>
+            <h6>
+              Our service can help you to make your urls short that ease urls
+              sharing
+            </h6>
+            <br />
           </div>
         </div>
-      </main>
 
-      <footer><%- include('../components/footer'); %></footer>
-    </div>
-  </body>
+        <div class="col-sm-4">
+          <div class="well">
+            <h5>Upcoming Features:</h5>
+            <ul>
+              <li>Analytics</li>
+              <li>Contact Us</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer><%- include('../components/footer'); %></footer>
+  </div>
+</body>
+
 </html>

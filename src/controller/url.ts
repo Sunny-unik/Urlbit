@@ -7,7 +7,7 @@ import { escapeHTML } from "../utils/escapeHTML";
 function ErrorHelper(error: Error, code: number, name?: string) {
   return {
     ...error,
-    code: error.name === name ? code : 500,
+    code: error.name === name ? code : 500
   };
 }
 
@@ -17,7 +17,7 @@ const urlController = {
       const shortId = nanoid(8);
       await urlSchema.create({
         redirectUrl,
-        nanoId: shortId,
+        nanoId: shortId
       });
       return { data: { shortId }, code: 200 };
     } catch (error) {
@@ -44,17 +44,17 @@ const urlController = {
         from: process.env.MAIL_SENDER!,
         to: process.env.MAIL_TO!,
         subject: escapeHTML(title),
-        html: marked(escapeHTML(description)),
+        html: marked(escapeHTML(description))
       };
       await sendMail(mailOptions, process.env.MAIL_PASSWORD!);
       return {
         data: { message: "Your message delivered successfully" },
-        code: 200,
+        code: 200
       };
     } catch (error) {
       return { ...(error as Error), code: 500 };
     }
-  },
+  }
 };
 
 export default urlController;
