@@ -22,7 +22,7 @@ module.exports = {
   rules: {
     semi: ["error", "always"],
     quotes: ["error", "double"],
-    "prettier/prettier": ["error", { endOfLine: "auto" }],
+    "prettier/prettier": ["error", { endOfLine: "lf" }],
     "check-file/filename-naming-convention": [
       "error",
       { "*.{js,ts,ejs}": "CAMEL_CASE" }
