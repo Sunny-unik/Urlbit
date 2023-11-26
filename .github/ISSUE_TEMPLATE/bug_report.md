@@ -47,7 +47,10 @@ Steps to reproduce the behavior:
 - OS: [e.g. iOS8.1]
 - Browser [e.g. stock browser, safari] -->
 
-<!--
-## Additional context
+## [optional] Additional context
 
-Add any other context about the problem here. -->
+<!-- Add any other context about the problem here. -->
+
+---
+
+- [ ] You want to work on that issue
