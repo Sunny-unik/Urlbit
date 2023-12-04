@@ -4,6 +4,8 @@
 
 > A URL shortener app ready for Open Source contributions
 
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/Sunny-unik/Urlbit)
+
 </div>
 
 ## Tech Stack
