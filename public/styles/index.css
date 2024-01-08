@@ -18,8 +18,8 @@ body {
   }
 }
 
-.CodeMirror,
-.CodeMirror-scroll {
+.CodeMirror:not(.CodeMirror-fullscreen),
+.CodeMirror:not(.CodeMirror-fullscreen) .CodeMirror-scroll {
   padding: 1px;
   max-height: 280px;
   min-height: 200px !important;
