@@ -1,5 +1,5 @@
-<div class="flex items-center justify-center h-[82vh] z-20 font-mono">
-  <form class="bg-[rgba(255,255,255,0.1)] shadow-lg p-6 border-2 border-[rgba(0,0,0,0.1)] rounded-2xl flex flex-col w-xl-[33vw]" id="contactForm" autocomplete="off">
+<div class="flex items-center justify-center h-[82vh] font-mono">
+  <form class="bg-[rgba(255,255,255,0.1)] z-20 shadow-lg p-6 border-2 border-[rgba(0,0,0,0.1)] rounded-2xl flex flex-col w-xl-[33vw] overflow-y-auto max-h-full" id="contactForm" autocomplete="off">
     <div class="mb-4">
       <h1 class="text-lg font-bold">Contact Us</h1>
     </div>
@@ -19,4 +19,28 @@
       <input type="submit" id="submit" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer" />
     </div>
   </form>
+
+  <div>
+    <!-- Include SimpleMDE CSS via CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <!-- Include SimpleMDE JavaScript via CDN -->
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Initialize SimpleMDE for the description field
+        new SimpleMDE({
+          element: document.querySelector('#description'),
+          forceSync: true, // This option ensures that the markdown content is immediately synced with the textarea
+          toolbar: [
+            "bold", "italic", "strikethrough", "|",
+            "heading-1", "heading-2", "heading-3", "|",
+            "code", "unordered-list", "ordered-list", "|",
+            "link", "table", "|",
+            "preview", "side-by-side", "fullscreen"
+          ],
+        });
+      });
+    </script>
+  </div>
 </div>
