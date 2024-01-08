@@ -17,3 +17,10 @@ body {
     @apply p-2 mx-2 bg-gray-800 text-white font-semibold text-center rounded-md shadow-md hover:bg-green-700 focus:outline-none;
   }
 }
+
+.CodeMirror,
+.CodeMirror-scroll {
+  padding: 1px;
+  max-height: 280px;
+  min-height: 200px !important;
+}
