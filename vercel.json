@@ -1,0 +1,30 @@
+{
+  "name": "urlbit",
+  "version": 2,
+  "builds": [
+    { "src": "index.js", "use": "@vercel/node" },
+    { "src": "src/**", "use": "@vercel/static" },
+    { "src": "public/**", "use": "@vercel/static" }
+  ],
+  "routes": [
+    {
+      "src": "/((?!.*\\.\\w+$).*)",
+      "dest": "/index.js"
+    },
+    {
+      "src": "/(.+\\.[a-z]+)$",
+      "dest": "/public/$1"
+    },
+    {
+      "src": "/(.+\\.[a-z]+)$",
+      "dest": "src/$1"
+    }
+  ],
+  "git": {
+    "deploymentEnabled": {
+      "master": true,
+      "dev": false,
+      "patch": false
+    }
+  }
+}
