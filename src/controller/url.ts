@@ -1,5 +1,4 @@
 import urlSchema from "../models/url";
-import { nanoid } from "nanoid";
 import { marked } from "marked";
 import sendMail from "../utils/mailService";
 import { escapeHTML } from "../utils/escapeHTML";
@@ -14,6 +13,7 @@ function ErrorHelper(error: Error, code: number, name?: string) {
 const urlController = {
   saveUrl: async (redirectUrl: string) => {
     try {
+      const { nanoid } = await import("nanoid");
       const shortId = nanoid(8);
       await urlSchema.create({
         redirectUrl,
@@ -44,7 +44,7 @@ const urlController = {
         from: process.env.MAIL_SENDER!,
         to: process.env.MAIL_TO!,
         subject: escapeHTML(title),
-        html: marked(escapeHTML(description))
+        html: await marked(escapeHTML(description))
       };
       await sendMail(mailOptions, process.env.MAIL_PASSWORD!);
       return {
