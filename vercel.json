@@ -2,9 +2,9 @@
   "name": "urlbit",
   "version": 2,
   "builds": [
-    { "src": "index.js", "use": "@vercel/node" },
-    { "src": "src/**", "use": "@vercel/static" },
-    { "src": "public/**", "use": "@vercel/static" }
+    { "src": "dist/index.js", "use": "@vercel/node" },
+    { "src": "dist/src/views/**", "use": "@vercel/static" },
+    { "src": "dist/public/**", "use": "@vercel/static" }
   ],
   "routes": [
     {
@@ -12,12 +12,12 @@
       "dest": "/index.js"
     },
     {
-      "src": "/(.+\\.[a-z]+)$",
+      "src": "/public/(.+\\.[a-z]+)$",
       "dest": "/public/$1"
     },
     {
-      "src": "/(.+\\.[a-z]+)$",
-      "dest": "src/$1"
+      "src": "/src/views/(.+\\.[a-z]+)$",
+      "dest": "/src/views/$1"
     }
   ],
   "git": {
